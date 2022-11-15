@@ -20,6 +20,7 @@ const Contact = () => {
                 <div className="form-control lg:w-96">
                     <input type="text" placeholder="Your Message" className="input input-bordered h-32" />
                 </div>
+                <button className="btn w-32 btn-primary mx-auto bg-gradient-to-r from-primary to-secondary text-white">Submit</button>
             </form>
         </section>
         
