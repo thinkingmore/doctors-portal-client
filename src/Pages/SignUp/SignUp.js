@@ -5,8 +5,6 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
 
-    const [isLoading, setIsLoading] = useState(false);
-
     const { register, handleSubmit, formState: {errors} } = useForm();
 
     const { createUser } = useContext(AuthContext);
