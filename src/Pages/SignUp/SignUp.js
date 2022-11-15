@@ -1,15 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
 
     const { register, handleSubmit, formState: {errors} } = useForm();
-
-    const { createUser } = useContext(AuthContext);
+ 
+    const { createUser, updateUser } = useContext(AuthContext);
+    const [signUpError, setSignUpError] = useState('');
     
     const handleSignUp = (data) => {
+        
         console.log(data);
         // console.log(errors);
            
@@ -17,12 +20,22 @@ const SignUp = () => {
             .then( result => {
                 const user = result.user;
                 console.log(user)
+                toast('User Created Successfully')
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                .then(() => {})
+                .catch(error => console.log(error))
             })
-            .catch(error=> console.error(error))
+            .catch(error=> {
+                console.error(error)
+                setSignUpError(error.message)
+            })
                    
     }
     return (
-        <div className='h-[578px] flex justify-center items-center'>  
+        <div className='h-[578px] flex justify-center items-center'>
             <div className='w-96 p-7'>
                 <h2 className='text-3xl text-center'>Sign Up</h2>
                 <form onSubmit={handleSubmit(handleSignUp)}>
@@ -53,6 +66,7 @@ const SignUp = () => {
                         {errors.password && <p className='text-red-600' role="alert">{errors.password?.message}</p>}
                     </div>
                     <input value="Sign Up" className='btn btn-accent w-full text-white mt-4' type="submit" />
+                    { signUpError && <p className='text-red-600'>{signUpError}</p>}
                 </form>
                 <p>Already have an account? <Link to="/login" className='text-primary'>Please Login</Link></p>
                 <div className="divider">OR</div>
