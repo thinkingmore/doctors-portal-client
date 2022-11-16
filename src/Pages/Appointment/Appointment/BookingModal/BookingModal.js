@@ -1,9 +1,10 @@
+import { error } from 'daisyui/src/colors';
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../contexts/AuthProvider';
 
-const BookingModal = ({treatment,setTreatment,selectedDate}) => {
+const BookingModal = ({treatment,setTreatment,selectedDate, refetch}) => {
     const {name,slots} = treatment; // treatment is appointment options just different name
     const date = format(selectedDate, 'PP');
 
@@ -41,7 +42,11 @@ const BookingModal = ({treatment,setTreatment,selectedDate}) => {
             console.log(data);
             if (data.acknowledged === true) {
                 setTreatment(null);
-                toast.success('Booking confirmed')
+                toast.success('Booking confirmed');
+                refetch();
+            }
+            else{
+                toast.error(data.message);
             }
         })
 
