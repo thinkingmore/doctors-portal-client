@@ -3,7 +3,7 @@ import treatment from '../../../assets/images/treatment.png'
 
 const Exceptional = () => {
     return (
-        <div class="grid md:grid-cols-2 p-12 mt-8 gap-4">
+        <div className="grid md:grid-cols-2 p-12 mt-8 gap-4">
             <div>
                 <img src={treatment} style={{width: "458px"}} alt="exceptional"/>
             </div>    
