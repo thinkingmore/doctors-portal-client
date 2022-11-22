@@ -15,7 +15,9 @@ const ManageDoctors = () => {
     const { data: doctors = [], refetch, isLoading } = useQuery({
         queryKey: ['doctors'],
         queryFn: () => fetch('http://localhost:5000/doctors',{
-            header: `bearer ${localStorage.getItem('accessToken')}`
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
         .then(res=> res.json())
         .catch(error=> console.error(error))
@@ -30,7 +32,7 @@ const ManageDoctors = () => {
             method: 'DELETE',
             headers: {
                 'content-type' : 'application/json',
-                Authorization: `bearer ${localStorage.getItem('accessToken')}`
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             },
         })
         .then(res=> res.json())
