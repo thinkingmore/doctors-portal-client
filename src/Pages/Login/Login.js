@@ -8,7 +8,7 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [loginError, setLoginError] = useState('');
 
-    const [loginUserEmail, setLoginUserEmail] = useState(' ');
+    const [loginUserEmail, setLoginUserEmail] = useState('');
 
     const [token] = useToken(loginUserEmail);
 
